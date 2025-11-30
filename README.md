@@ -2,6 +2,8 @@
 
 A Clojure Clerk notebook for Advent-of-Code.
 
+See the notebook live [HERE!](https://iomonad.github.io/advent-of-code-2025/)
+
 ## Building static
 
 Build static Clerk notebook as follow:
