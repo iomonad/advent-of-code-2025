@@ -25,17 +25,6 @@ jobs:
           cli: 1.11.4.1474
           lein: 2.11.2
           cljfmt: latest
-      
-      - name: Cache clojure dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.m2/repository
-            ~/.gitlibs
-            ~/.deps.clj
-            # List all files containing dependencies:
-          key: cljdeps-${{ hashFiles('project.clj') }}
-          restore-keys: cljdeps-
 
       - name: Install dependencies
         run: lein -U deps
