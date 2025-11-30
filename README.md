@@ -1,4 +1,4 @@
-# AOC-2025
+# AOC-2025 [![Clojure CI](https://github.com/iomonad/advent-of-code-2025/actions/workflows/clojure.yml/badge.svg?branch=master)](https://github.com/iomonad/advent-of-code-2025/actions/workflows/clojure.yml)
 
 A Clojure Clerk notebook for Advent-of-Code.
 
