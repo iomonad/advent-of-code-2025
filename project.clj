@@ -4,5 +4,6 @@
   :dependencies [[org.clojure/clojure         "1.12.3"]
                  [io.github.nextjournal/clerk "0.18.1158"]]
   :source-paths ["dev" "notebooks"]
-  :profiles {:dev {:dependencies   [[org.clojure/tools.namespace "1.5.0"]]}
+  :aliases {"build-static" ["run" "-m" "build"]}
+  :profiles {:dev {:dependencies [[org.clojure/tools.namespace "1.5.0"]]}
              :repl-options {:init-ns user}})

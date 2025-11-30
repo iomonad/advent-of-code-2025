@@ -7,6 +7,3 @@
                  :browse? true
                  :port 8080})
   (clerk/show! "notebooks/warmup.clj"))
-
-(comment
-  (clerk/show! "notebooks/warmup.clj"))
