@@ -3,4 +3,4 @@
 
 (defn -main [& _args]
   (clerk/build! {:paths ["notebooks/*"]
-                 :index "notebooks/warmup.clj"}))
+                 :index "notebooks/index.clj"}))
