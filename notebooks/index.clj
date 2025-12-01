@@ -1,7 +1,6 @@
 ^{:nextjournal.clerk/visibility {:code :hide}}
 (ns index
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [nextjournal.clerk :as clerk])
   (:import javax.imageio.ImageIO
            java.net.URL))
@@ -16,27 +15,31 @@
 
 ;;; ## Assignements
 
+;;; We can retrieve all the assignements, dynamically as follow:
+(def assignements
+  (->> (all-ns)
+       (filter (fn [ns]
+                 (str/starts-with? (name (ns-name ns)) "day")))
+       (map meta)))
+
+;;; Then, generate a fancy grid with namespace metadata:
+
 ^{:nextjournal.clerk/visibility {:code :hide}}
 
 ;;; courtesy of `clerk-demo` repo
-(let [aoc-notebooks
-      [{:title "Day01"
-        :preview "https://images.unsplash.com/photo-1553293377-e51189852c0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMyfHxzYWZlJTIwbG9ja3xlbnwwfHwwfHx8MA%3D%3D"
-        :path "notebooks/day01"
-        :description "Day 1: Secret Entrance"}]]
-  (clerk/html
-   (into
-    [:div.md:grid.md:gap-8.md:grid-cols-2.pb-8]
-    (map
-     (fn [{:keys [path preview title description]}]
-       [:a.rounded-lg.shadow-lg.border.border-gray-300.relative.flex.flex-col.hover:border-indigo-600.group.mb-8.md:mb-0
-        {:href (clerk/doc-url path) :title path :style {:height 300}}
-        [:div.flex-auto.overflow-hidden.rounded-t-md.flex.items-center.px-3.py-4
-         [:img {:src preview :width "100%" :style {:object-fit "contain"}}]]
-        [:div.sans-serif.border-t.border-gray-300.px-4.py-2.group-hover:border-indigo-600
-         [:div.font-bold.block.group-hover:text-indigo-600 title]
-         [:div.text-xs.text-gray-500.group-hover:text-indigo-600.leading-normal description]]])
-     aoc-notebooks))))
+(clerk/html
+ (into
+  [:div.md:grid.md:gap-8.md:grid-cols-2.pb-8]
+  (map
+   (fn [{:keys [path preview title description]}]
+     [:a.rounded-lg.shadow-lg.border.border-gray-300.relative.flex.flex-col.hover:border-indigo-600.group.mb-8.md:mb-0
+      {:href (clerk/doc-url path) :title path :style {:height 300}}
+      [:div.flex-auto.overflow-hidden.rounded-t-md.flex.items-center.px-3.py-4
+       [:img {:src preview :width "100%" :style {:object-fit "contain"}}]]
+      [:div.sans-serif.border-t.border-gray-300.px-4.py-2.group-hover:border-indigo-600
+       [:div.font-bold.block.group-hover:text-indigo-600 title]
+       [:div.text-xs.text-gray-500.group-hover:text-indigo-600.leading-normal description]]])
+   assignements)))
 
 ;;; -----
 ^{:nextjournal.clerk/visibility {:code :hide}}
