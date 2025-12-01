@@ -20,10 +20,10 @@
 
 ;;; courtesy of `clerk-demo` repo
 (let [aoc-notebooks
-      [{:title "Day00"
-        :preview "https://images.unsplash.com/photo-1606237598791-e862e965fb9d?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        :path "notebooks/day00"
-        :description "Day00"}]]
+      [{:title "Day01"
+        :preview "https://images.unsplash.com/photo-1553293377-e51189852c0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMyfHxzYWZlJTIwbG9ja3xlbnwwfHwwfHx8MA%3D%3D"
+        :path "notebooks/day01"
+        :description "Day 1: Secret Entrance"}]]
   (clerk/html
    (into
     [:div.md:grid.md:gap-8.md:grid-cols-2.pb-8]
