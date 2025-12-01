@@ -8,7 +8,7 @@
             [utils :refer [get-aoc-input]]
             [clojure.string :as str]))
 
-;;; # DAY01: Safe Cracking
+;;; # Day 1: Secret Entrance
 ;;; ## Problem Context
 ;;; The safe has a dial with only an arrow on it; around the dial are the numbers 0 through 99 in order.
 
