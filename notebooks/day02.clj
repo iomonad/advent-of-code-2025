@@ -61,3 +61,19 @@
      (reduce +))
 
 ;;; # Part 2
+
+;;; Now, an ID is invalid if it is made only of some sequence of digits repeated at least twice.
+
+;;; Our capture group regex pattern already exists for one, we can simply extned for multiple
+;;; repetitive (note that this handle more than twice but in our case this shloud work).
+
+(defn invalid-id-part2
+  [[a b]]
+  (let [r (range (read-string a) (inc (read-string b)))]
+    (filter (fn [c]
+              (re-matches #"^(\d+)\1+$" (str c)))
+            r)))
+
+(->> input-sliced
+     (mapcat invalid-id-part2)
+     (reduce +))
