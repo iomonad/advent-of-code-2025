@@ -5,8 +5,8 @@
    :path "notebooks/day04"
    :preview "https://images.unsplash.com/photo-1503694978374-8a2fa686963a?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
   (:require [nextjournal.clerk :as clerk]
-            [clojure.string :as str]
-            [utils :refer [get-aoc-input]]))
+            [utils :refer [get-aoc-input bench]]
+            [clojure.set :as set]))
 
 ;;; # Day 4: Printing Department
 
@@ -83,3 +83,64 @@
 ;;; > Consider your complete diagram of the paper roll locations. How many rolls of paper can be accessed by a forklift?
 
 (def result (count (filter #(can-forklifts? % graph-input 4) graph-input)))
+
+;;; ## Part2
+
+;; Now, the Elves just need help accessing as much of the paper as they can.
+
+;; Once a roll of paper can be accessed by a forklift, it can be removed. Once a roll of paper is removed, the forklifts might be able to access more rolls of paper, which they might also be able to remove. How many total rolls of paper could the Elves remove if they keep repeating this process?
+
+;;; ### Solution
+
+;;; Compute tail-rec the result with set difference until no results, yield acc.
+
+^{:nextjournal.clerk/visibility {:result :hide}}
+(defn forkliftable-tailrec
+  ([graph]
+   (forkliftable-tailrec graph []))
+  ([graph acc]
+   (let [tot-acc (set (filter #(can-forklifts? % graph 4) graph))]
+     (if (empty? tot-acc) acc
+         (recur (set/difference graph tot-acc) (conj acc tot-acc))))))
+
+^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+(defn forkliftable-tailrec-benched
+  ([graph]
+   (forkliftable-tailrec-benched graph []))
+  ([graph [acc acc-bench]]
+   (let [{:keys [result time-ms]} (bench (fn [] (set (filter #(can-forklifts? % graph 4) graph))))]
+     (if (empty? result) [acc acc-bench]
+         (recur (set/difference graph result) [(conj acc result) (conj acc-bench time-ms)])))))
+
+^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+(defonce result-bis-stepped (forkliftable-tailrec graph-input))
+^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+(defonce result-bis-step-count (map count result-bis-stepped))
+
+^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+(def benched-bis (forkliftable-tailrec-benched graph-input))
+^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+(def compute-time (second benched-bis))
+
+^{:nextjournal.clerk/visibility {:code :hide}}
+(clerk/row
+ {::clerk/width :full}
+ (clerk/plotly {:data [{:y (vec result-bis-step-count)
+                        :x (map (partial str "Cycle ") (range 0 (count result-bis-step-count)))
+                        :fill "tozerox"
+                        :fillcolor "rgba(0, 100,70,1.2)"
+                        :line {:color "transparent"}
+                        :name "Number of removed rolls"
+                        :showlegend true
+                        :type "scatter"}]})
+ (clerk/plotly {:data [{:y (vec compute-time)
+                        :yaxis {:title "Y Values (X²)"}
+                        :x (map (partial str "Cycle ") (range 0 (count compute-time)))
+                        :xaxis {:title "X Values"}
+                        :showlegend true
+                        :name "Compute time per cycle"
+                        :type "scatter"}]}))
+
+;;; Then execute the solution
+
+(defonce result-bis (reduce + result-bis-step-count))
