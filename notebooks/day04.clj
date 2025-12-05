@@ -127,13 +127,10 @@
  {::clerk/width :full}
  (clerk/plotly {:data [{:y (vec result-bis-step-count)
                         :x (map (partial str "Cycle ") (range 0 (count result-bis-step-count)))
-                        :fill "tozerox"
-                        :fillcolor "rgba(0, 100,70,1.2)"
-                        :line {:color "transparent"}
                         :name "Number of removed rolls"
                         :showlegend true
                         :type "scatter"}]})
- (clerk/plotly {:data [{:y (vec compute-time)
+ (clerk/plotly {:data [{:y (reverse (vec compute-time))
                         :yaxis {:title "Y Values (X²)"}
                         :x (map (partial str "Cycle ") (range 0 (count compute-time)))
                         :xaxis {:title "X Values"}
