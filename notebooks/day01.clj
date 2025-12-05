@@ -1,12 +1,10 @@
 ^{:nextjournal.clerk/visibility #{:hide-ns}}
 (ns day01
-  {:title "Day01"
+  {:title "Day 1: Secret Entrance"
    :description "Day 1: Secret Entrance"
    :path "notebooks/day01"
    :preview "https://images.unsplash.com/photo-1553293377-e51189852c0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMyfHxzYWZlJTIwbG9ja3xlbnwwfHwwfHx8MA%3D%3D"}
-  (:require [clojure.java.io :as io]
-            [utils :refer [get-aoc-input]]
-            [clojure.string :as str]))
+  (:require [utils :refer [get-aoc-input]]))
 
 ;;; # Day 1: Secret Entrance
 ;;; ## Problem Context

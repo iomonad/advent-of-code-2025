@@ -1,11 +1,10 @@
 ^{:nextjournal.clerk/visibility #{:hide-ns}}
 (ns day03
-  {:title "day03"
+  {:title "Day 3: lobby"
    :description "Day 3: lobby"
    :path "notebooks/day03"
    :preview "https://images.unsplash.com/photo-1676569682207-d3bf4dfe483d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=m3wxmja3fdb8mhxzzwfyy2h8mtb8fgxvymj5jtiwz25vbwv8zw58mhx8mhx8fda%3d"}
-  (:require [clojure.java.io :as io]
-            [utils :refer [get-aoc-input]]))
+  (:require [utils :refer [get-aoc-input]]))
 
 ;;; # day 3: lobby
 
