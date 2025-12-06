@@ -20,7 +20,11 @@
   (->> (all-ns)
        (filter (fn [ns]
                  (str/starts-with? (name (ns-name ns)) "day")))
-       (map meta)))
+       (map meta)
+       (sort-by (fn [{:keys [path]}]
+                  (read-string (last (str/split (last (str/split path #"notebooks/"))
+                                                #"day")))))
+       (reverse)))
 
 ;;; Then, generate a fancy grid with namespace metadata:
 
