@@ -39,12 +39,33 @@
 (def number-matrix-transposed
   (apply mapv vector number-matrix))
 
-;; ### Part 1
+;;; ### Part 1
 
 ;;; Apply transposed matrix with operation, sum to acc
 
 (def part1
   (->> (zipmap number-matrix-transposed operations)
+       (reduce (fn [acc [nums op]]
+                 (+ acc (apply op nums)))
+               0)))
+;;; Part 2
+
+;;; Cephalopod math is written right-to-left in columns. Each number is given in its own column, with the most significant digit at the top and the least significant digit at the bottom. (Problems are still separated with a column consisting only of spaces, and the symbol at the bottom of the problem is still the operator to use.)
+
+;;; Reverse including padding, remove \space and apply the logic of part 1
+
+(def reversed-matrix-full
+  (->> input
+       (butlast)
+       (apply mapv vector)
+       (map #(apply str %))
+       (map str/trim)
+       (partition-by (complement seq))
+       (filter (partial every? seq))
+       (map (partial mapv read-string))))
+
+(def part2
+  (->> (zipmap reversed-matrix-full operations)
        (reduce (fn [acc [nums op]]
                  (+ acc (apply op nums)))
                0)))
