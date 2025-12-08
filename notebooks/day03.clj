@@ -45,7 +45,6 @@
   (if (zero? pos) total
       (let [a (apply max (drop-last (dec pos) bank))
             b (.indexOf bank a)]
-        (println pos total bank)
         (recur (dec pos) (+ (* total 10) a) (drop (inc b) bank)))))
 
 ;; ## Part1:
