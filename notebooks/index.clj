@@ -17,14 +17,18 @@
 
 ;;; We can retrieve all the assignements, dynamically as follow:
 (def assignements
-  (->> (all-ns)
-       (filter (fn [ns]
-                 (str/starts-with? (name (ns-name ns)) "day")))
-       (map meta)
-       (sort-by (fn [{:keys [path]}]
-                  (read-string (last (str/split (last (str/split path #"notebooks/"))
-                                                #"day")))))
-       (reverse)))
+  (try
+    (->> (all-ns)
+         (filter (fn [ns]
+                   (str/starts-with? (name (ns-name ns)) "day")))
+         (map meta)
+         (sort-by (fn [{:keys [path]}]
+                    (read-string (last (str/split (last (str/split path #"notebooks/"))
+                                                  #"day")))))
+         (reverse))
+    (catch Exception e
+      (println e)
+      [])))
 
 ;;; Then, generate a fancy grid with namespace metadata:
 
