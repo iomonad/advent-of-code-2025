@@ -116,7 +116,7 @@
                   (* yi yi)
                   (* zi zi)))))
 
-;;; Create a map of all pairs of points, with their line distance
+;;; Create a map of all the unique ways of taking pairs of points different elements from input coord
 
 ^{:nextjournal.clerk/visibility {:result :hide}}
 (defn- dist-map
@@ -134,7 +134,7 @@
       (conj (disj graph a b) (set/union a b))
       graph)))
 
-;;; Compute closest and return mutated graph on each n cycles
+;;; Set of connected components and, given weigthed pairs of points, links the closest pairs and return graph
 
 ^{:nextjournal.clerk/visibility {:result :hide}}
 (defn- solve
@@ -147,7 +147,7 @@
 
 ;;; Part 1
 
-;;; > Your list contains many junction boxes; connect together the 1000 pairs of junction boxes which are closest together. Afterward, what do you get if you multiply together the sizes of the three largest circuits?
+;;; > Your list contains many junction boxes; connect together the **1000** pairs of junction boxes which are closest together. Afterward, what do you get if you multiply together the sizes of the three largest circuits?
 
 (def part1
   (->> (dist-map input-num)
