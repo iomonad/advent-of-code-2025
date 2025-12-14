@@ -2,6 +2,13 @@
   (:require [clojure.string :as str]
             [clojure.java.io :as io]))
 
+(defn get-aoc-input-raw
+  ([]
+   (get-aoc-input-raw (str *ns*)))
+  ([f]
+   (some-> (io/resource (str "input/" f))
+           (slurp))))
+
 (defn get-aoc-input
   ([]
    (get-aoc-input (str *ns*)))
