@@ -5,6 +5,7 @@
                  [io.github.nextjournal/clerk "0.18.1158"]
                  [com.cnuernber/charred "1.037"]
                  [criterium "0.4.6"]
+                 [aysylu/loom "1.0.2"]
                  [org.clojure/math.combinatorics "0.3.0"]]
   :source-paths ["dev" "notebooks" "src"]
   :aliases {"build-static" ["run" "-m" "build"]}
